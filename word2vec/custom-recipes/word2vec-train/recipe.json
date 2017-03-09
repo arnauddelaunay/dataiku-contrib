@@ -112,6 +112,29 @@
             "defaultValue":0,
             "mandatory" : true
         },
+        {
+            "name": "model_format",
+            "label" : "Model file format",
+            "description": "File format for the model. Leave the default value of word2vec-binary if you want to reuse the plugin afterwards",
+            "defaultValue" : "word2vec-binary",
+            "type": "SELECT",
+            "mandatory" : true,
+            "selectChoices": [
+                {
+                    "value": "gensim",
+                    "label": "Gensim"
+                },
+                {
+                    "value": "word2vec-text",
+                    "label": "Word2Vec C format (text)"
+                },
+                {
+                    "value": "word2vec-binary",
+                    "label": "Word2Vec C format (binary)"
+                }
+
+            ]
+        },
 
         // less useful
         {   "type" : "SEPARATOR", "label" : "Advanced" },

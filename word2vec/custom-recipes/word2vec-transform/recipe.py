@@ -32,15 +32,17 @@ def makeFeatureVec(words, model, num_features):
     return featureVec
 
 if modelformat == "gensim":
-    model = gensim.models.Word2Vec.load(modelfile)
+    model = gensim.models.KeyedVectors.load(modelfile)
+    print "gensim"
 elif modelformat == "word2vec-text":
-    model = gensim.models.Word2Vec.load_word2vec_format(modelfile, binary=False)
+    model = gensim.models.KeyedVectors.load_word2vec_format(modelfile, binary=False)
 elif modelformat == "word2vec-binary":
-    model = gensim.models.Word2Vec.load_word2vec_format(modelfile, binary=True)
+    model = gensim.models.KeyedVectors.load_word2vec_format(modelfile, binary=True)
 else:
     raise Exception("Unknown model format: %s" % modelformat)
+print model
 index2word_set = set(model.index2word)
-word2vecdim = model.vector_size
+word2vecdim = model.syn0.shape[1]
 
 if keep_all_cols :
     myschema = [val for val in input_text_dataset.read_schema()]

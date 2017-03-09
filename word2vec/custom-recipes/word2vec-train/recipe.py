@@ -22,7 +22,8 @@ sg = config.get('sg')
 if sg == 'cbow' :
 	sg = 0 
 else :
-	sg = 1	
+	sg = 1
+model_format = str(config.get('model_format'))
 size = int(config['size'])
 iterations = int(config['iter'])
 workers = int(config['workers'])
@@ -64,4 +65,10 @@ model = word2vec.Word2Vec(sentences=mycorpus \
 # calling init_sims will make the model much more memory-efficient.
 model.init_sims(replace=True)
 
-model.save(model_repository_path + '/' + modelname)
+print 'saving model with format : %s' % model_format
+if model_format=='word2vec-binary':
+	model.wv.save_word2vec_format(model_repository_path + '/' + modelname + '.bin', binary=True)
+elif model_format=='word2vec-binary':
+	model.wv.save_word2vec_format(model_repository_path + '/' + modelname + '.txt', binary=False)
+else:
+	model.save(model_repository_path + '/' + modelname)
